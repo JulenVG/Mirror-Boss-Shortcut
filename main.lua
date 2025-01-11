@@ -12,11 +12,19 @@ function onClear()
         local gridIndex = room:GetGridIndex(room:GetCenterPos())
         local width = room:GetGridWidth()
         local adjustedGridIndex = gridIndex - width * 2 -- Moving the spawn coordinates of the trapdoor two rows
-        print(tostring(gridIndex))
-        print(tostring(width))
+        
+        --If the trapdoor spot is a pit it removes the entity so the trapdoor can spawn, there is probably another way of doing this but I wasn't able
+        local gridEntity = room:GetGridEntity(adjustedGridIndex)
+        if gridEntity and gridEntity:GetType() == GridEntityType.GRID_PIT then 
+            room:RemoveGridEntity(adjustedGridIndex, 0, true)
+            
+            --The api documentation said that this is not recommended. When I was testing the mod it did nothing weird so I keep it.
+            room:Update()
+        end
 
         -- Generate the trapdoor to move to the next floor
         room:SpawnGridEntity(adjustedGridIndex, GridEntityType.GRID_TRAPDOOR, 0, 0, 0)
+
         local success = room:TrySpawnSecretExit(true, true)
     end 
 end
