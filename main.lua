@@ -25,7 +25,8 @@ function onClear()
         -- Generate the trapdoor to move to the next floor
         room:SpawnGridEntity(adjustedGridIndex, GridEntityType.GRID_TRAPDOOR, 0, 0, 0)
 
-        local success = room:TrySpawnSecretExit(true, true)
+        -- Generate the alt path door
+        room:TrySpawnSecretExit(true, true)
     end 
 end
 
