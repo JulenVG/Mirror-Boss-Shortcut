@@ -1,8 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-	<name>Mirror World Boss Exits</name>
-	<directory>mirror_boss_trapdoor</directory>
-	<description/>
-	<version>1.0</version>
-	<visibility/>
-</metadata>
+    <name>Mirror World Boss Exits</name>
+    <directory>mirror_boss_trapdoor</directory>
+    <id>3405584968</id>
+    <description>Mirror World Trapdoor
+Tired of having to walk all the way back to the mirror after defeating the boss in the Mirror World, only to then retrace your steps again? This mod saves you the hassle!
 
+When you defeat the boss in the Mirror World, the game will now spawn:
+
+-A trapdoor: For those who want to continue to the normal floors.
+-A secret door: For those who prefer to take the alternative path.
+
+No more tedious backtracking just enjoy smoother runs!</description>
+    <version>1.1</version>
+    <visibility>Public</visibility>
+    <tag id="Tweaks"/>
+</metadata>
