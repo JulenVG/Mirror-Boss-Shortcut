@@ -17,7 +17,7 @@ Version 1.10 Update:
 In this update, the door states  (closed, damaged, or open) are now shared between the Mirror World and the normal world. For example, if you open a door in the normal world, it will remain open in the Mirror World as well, creating a more seamless experience when switching between dimensions.
 
 If you encounter any bugs, feel free to leave a comment I'm happy to help! And don't forget to vote if you enjoy the mod!</description>
-    <version>1.12</version>
+    <version>1.13</version>
     <visibility>Public</visibility>
     <tag id="Tweaks"/>
 </metadata>

@@ -85,6 +85,7 @@ local function onClear()
             end
             handleSecretExit(room)
     end
+    handleSecretExit(room)
 end
 
 -- Called when entering a new room to handle specific actions
@@ -142,9 +143,10 @@ mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, clearedRoom)
 mod:AddCallback(ModCallbacks.MC_POST_BOMB_UPDATE, isSecretExitOpen)
 mod:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, resetDoorState)
 
--- Function used for testing purposes
+-- Function only for testing purposes
 -- local function test()
---     print("doorState = " ..tostring(doorState))
---     print("alreadyBlown = " ..tostring(alreadyBlown))
+    -- print("doorState = " ..tostring(doorState))
+    -- print("alreadyBlown = " ..tostring(alreadyBlown))
+
 -- end
 -- mod:AddCallback(ModCallbacks.MC_USE_ITEM, test)
