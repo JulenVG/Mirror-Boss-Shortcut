@@ -8,11 +8,21 @@ local function handleSecretExit(room)
     for i = 0, 7 do
         local door = room:GetDoor(i)
         if door and door.TargetRoomType == 27 then
-            if doorState == 1 and alreadyBlown == 0 then
-                door:TryBlowOpen(true, nil)
-            elseif doorState == 2 then
-                door:Open()
-                door:SetLocked(false)
+            if not room:IsMirrorWorld() then
+                if doorState == 1 and alreadyBlown == 0 then
+                    door:TryBlowOpen(true, nil)
+                    alreadyBlown = 1
+                elseif doorState == 2 then
+                    door:Open()
+                    door:SetLocked(false)
+                end
+            elseif room:IsMirrorWorld() then
+                if doorState == 1 then
+                    door:TryBlowOpen(true, nil)
+                elseif doorState == 2 then
+                    door:Open()
+                    door:SetLocked(false)
+                end
             end
         end
     end
@@ -38,13 +48,8 @@ local function onClear()
         -- Spawns the trapdoor and the alt path door
         room:SpawnGridEntity(gridIndex, GridEntityType.GRID_TRAPDOOR, 0, 0, 0)
         room:TrySpawnSecretExit(true, true)
-        handleSecretExit(room)
-    elseif roomType == 5 and not room:IsMirrorWorld() then
-        handleSecretExit(room)
-        if doorState == 1 and alreadyBlown == 0 then
-            alreadyBlown = 1
-        end
     end
+    handleSecretExit(room)
 end
 
 -- Called when entering a new room to handle specific actions
@@ -64,9 +69,6 @@ local function clearedRoom()
         handleSecretExit(room)
     elseif not room:IsMirrorWorld() and roomType == 5 and room:IsClear() then
         handleSecretExit(room)
-        if doorState == 1 and alreadyBlown == 0 then
-            alreadyBlown = 1
-        end
     end
 end
 
@@ -96,7 +98,13 @@ local function resetDoorState()
     alreadyBlown = 0
 end
 
+local function test()
+    print("doorState = " ..tostring(doorState))
+    print("alreadyBlown = " ..tostring(alreadyBlown))
+
+end
 mod:AddCallback(ModCallbacks.MC_PRE_SPAWN_CLEAN_AWARD, onClear)
 mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, clearedRoom)
 mod:AddCallback(ModCallbacks.MC_POST_BOMB_UPDATE, isSecretExitOpen)
 mod:AddCallback(ModCallbacks.MC_POST_NEW_LEVEL, resetDoorState)
+mod:AddCallback(ModCallbacks.MC_USE_ITEM, test)
